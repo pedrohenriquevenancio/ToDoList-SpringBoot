@@ -14,8 +14,12 @@ public class TaskGroup {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    public Long getId() {
+        return id;
+    }
+
     private String name;
-    
+
     public String getName() {
         return name;
     }

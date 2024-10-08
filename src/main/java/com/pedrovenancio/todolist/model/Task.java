@@ -21,7 +21,7 @@ public class Task {
 
     @NotBlank(message = "Title is required")
     private String title;
-    
+
     public String getTitle() {
         return title;
     }
@@ -32,7 +32,7 @@ public class Task {
 
     @NotBlank(message = "Description is required")
     private String description;
-    
+
     public String getDescription() {
         return description;
     }
