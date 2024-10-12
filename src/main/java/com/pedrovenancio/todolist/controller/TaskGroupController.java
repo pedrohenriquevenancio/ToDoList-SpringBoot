@@ -33,18 +33,31 @@ public class TaskGroupController {
         return taskGroupService.getAll();
     }
 
-    @PostMapping("/store")
+    @PostMapping("/")
     public TaskGroup store(@Valid @RequestBody TaskGroup taskGroup) {
         return taskGroupService.store(taskGroup);
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<TaskGroup> update(@PathVariable Long id, @Valid @RequestBody TaskGroup taskGroup) {
         return taskGroupService.update(id, taskGroup);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         return taskGroupService.delete(id);
+    }
+
+    @PostMapping("/test")
+    public TaskGroup[] test() {
+        String[] colors = {"#FF6347", "#FFD700", "#FF8C00", "#FFA07A", "#FF69B4","#8A2BE2"};
+        TaskGroup[] tasksGroups = new TaskGroup[5];
+        for (int i = 0; i < 5; i++) {
+            TaskGroup task = new TaskGroup();
+            task.setName("Task Group " + (i + 1));
+            task.setColor(colors[i % colors.length]);
+            tasksGroups[i] = taskGroupService.store(task);
+        }
+        return tasksGroups;
     }
 }

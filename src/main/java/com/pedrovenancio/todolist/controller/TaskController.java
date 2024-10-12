@@ -29,17 +29,17 @@ public class TaskController {
         return taskService.getAll();
     }
 
-    @PostMapping("/store")
+    @PostMapping("/")
     public Task store(@Valid @RequestBody Task task) {
         return taskService.store(task);
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<Task> update(@PathVariable Long id, @Valid @RequestBody Task task) {
         return taskService.update(id, task);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         return taskService.delete(id);
     }
@@ -57,5 +57,18 @@ public class TaskController {
     @PutMapping("/unset-group/{id}")
     public ResponseEntity<Task> unsetTaskGroup(@PathVariable Long id) {
         return taskService.unsetGroup(id);
+    }
+
+    @PostMapping("/test")
+    public Task[] test() {
+        Task[] tasks = new Task[10];
+        for (int i = 0; i < 10; i++) {
+            Task task = new Task();
+            task.setTitle("Task " + i+1);
+            task.setDescription("Teste teste teste teste teste teste teste.");
+            task.setCompleted(false);
+            tasks[i] = taskService.store(task);
+        }
+        return tasks;
     }
 }
